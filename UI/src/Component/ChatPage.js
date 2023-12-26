@@ -15,7 +15,8 @@ const ChatPage = () => {
     setMessages(updatedMessages);
     setNewMessage("");
     setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
-
+    scrollToTop();
+    
     try {
       const formData = new FormData();
       formData.append("chatMessage", newMessage);
@@ -35,7 +36,6 @@ const ChatPage = () => {
         ]);
       }
     }
-    scrollToTop();
   };
 
   const handleKeyDown = (e) => {
