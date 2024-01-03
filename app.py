@@ -22,6 +22,7 @@ def hello():
 def decrypt(message):
     string=message
     new_string=string.replace("+"," ")
+    return new_string
 
 def clean_up_sentence(sentence):
     sentence_words=nltk.word_tokenize(sentence)
@@ -45,13 +46,24 @@ def bag_of_words(sentence,words,show_details=True):
     
 def predict_class(sentence,model):
     p=bag_of_words(sentence,words,show_details=False)
+    res=model.predict(np.array([p]))[0]
+    ERROR_THRESHOLD=0.5
+    result=[[i,r] for i,r in enumerate(res) if r>ERROR_THRESHOLD]
+    result.sort(key=lambda x:x[1],reverse=True)
+    result_list=[]
     
+    for r in result:
+        result_list.append({"intent":classes[r[0]],"probability":str})
+    return result_list
     
-    
-    
-    
-    
-    
+def getResponse(ints,intents_json):
+    tag=ints[0]['intent']
+    list_of_intents=intents_json['intents']
+    for i in list_of_intents:
+        if(i['tag']==tag):
+            result=random.choice(i['responses'])
+            break
+    return result   
     
     
 def chatbot_response(message):
@@ -60,9 +72,7 @@ def chatbot_response(message):
     return res
 
 
-
-
-@app.route("query/<sentence>")
+@app.route("/query/<sentence>")
 def query_chatbot(sentence):
     decrypt_msg=decrypt(sentence)
     response=chatbot_response(decrypt_msg)
