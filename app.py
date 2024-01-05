@@ -12,8 +12,9 @@ words=pickle.load(open('words.pkl','rb'))
 classes=pickle.load(open('classes.pkl','rb'))
 
 from flask import Flask,jsonify
-
+from flask_cors import CORS
 app=Flask(__name__)
+CORS(app)
 
 @app.route("/",methods=['GET'])
 def hello():
@@ -53,7 +54,7 @@ def predict_class(sentence,model):
     result_list=[]
     
     for r in result:
-        result_list.append({"intent":classes[r[0]],"probability":str})
+        result_list.append({"intent":classes[r[0]],"probability":str(r[1])})
     return result_list
     
 def getResponse(ints,intents_json):
@@ -65,12 +66,22 @@ def getResponse(ints,intents_json):
             break
     return result   
     
-    
-def chatbot_response(message):
-    intent=predict_class(message,model)
-    res=getResponse(intent,intents)
-    return res
+import spellchecker 
 
+def chatbot_response(message):
+    spell = spellchecker.SpellChecker()  
+    misspelled = spell.unknown(message.split())
+    if misspelled:  
+        return "Oops! I noticed a few spelling errors. Could you please check your spelling and try again?"
+    try:
+        intent = predict_class(message, model)
+        print("intent:", intent)
+        if intent[0]['intent'] == 'goodbye' and float(intent[0]['probability']) > 0.5:
+            return "I'm sorry, I didn't quite catch that. Could you please rephrase your question or provide more details? If it's an emergency, please call your local emergency services."
+        res = getResponse(intent, intents)
+    except:
+        res = "I'm sorry, I'm having trouble understanding your question. Could you please rephrase it or provide more details?"
+    return res
 
 @app.route("/query/<sentence>")
 def query_chatbot(sentence):
@@ -79,5 +90,4 @@ def query_chatbot(sentence):
     json_obj=jsonify({"top":{"response":response}})
     return json_obj
     
-
 app.run()
