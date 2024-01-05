@@ -35,7 +35,7 @@ const ChatPage = () => {
         ]);
       }
     }
-    
+    scrollToTop();
   };
 
   const handleKeyDown = (e) => {
@@ -140,32 +140,31 @@ const ChatPage = () => {
                       </div>
                     ))}
                   </div>
-
                   <div className="w-100 border rounded-pill">
                     <div className="w-100 d-flex">
-                      <input
-                        type="text"
-                        style={{
-                          resize: "none",
-                          outline: "none",
-                          width: "95%",
-                        }}
-                        className=" border-0 ps-3 py-3  ms-3 bg-transparent "
-                        id="text"
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        onKeyDown={(e) => handleKeyDown(e)}
-                        placeholder="Type your message..."
-                      ></input>
-                      <div>
-                        <button
-                          className="btn mt-2 px-3 me-3 text-white"
-                          style={{ backgroundColor: "#7F00FF" }}
-                          onClick={handleSendMessage}
-                        >
-                          Send
-                        </button>
-                      </div>
+                        <input
+                          type="text"
+                          style={{
+                            resize: "none",
+                            outline: "none",
+                            width: "95%",
+                          }}
+                          className=" border-0 ps-3 py-3  ms-3 bg-transparent "
+                          id="text"
+                          value={newMessage}
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          onKeyDown={(e) => handleKeyDown(e)}
+                          placeholder="Type your message..."
+                        ></input>
+                        <div>
+                          <button
+                            className="btn mt-2 px-3 me-3 text-white"
+                            style={{ backgroundColor: "#7F00FF" }}
+                            onClick={handleSendMessage}
+                          >
+                            Send
+                          </button>
+                        </div>
                     </div>
                   </div>
                 </div>
