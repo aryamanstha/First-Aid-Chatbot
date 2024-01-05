@@ -15,7 +15,7 @@ const ChatPage = () => {
     setMessages(updatedMessages);
     setNewMessage("");
     setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
-
+    scrollToTop();
     try {
       const formData = new FormData();
       formData.append("chatMessage", newMessage);
@@ -35,7 +35,7 @@ const ChatPage = () => {
         ]);
       }
     }
-    scrollToTop();
+    
   };
 
   const handleKeyDown = (e) => {
@@ -61,10 +61,10 @@ const ChatPage = () => {
     <section className="bg-light w-100 vh-100 m-0">
       <div className="w-100 vh-100">
         <div className="w-100 h-100">
-          <div className="w-100 h-100 col-md-8 col-lg-6 col-xl-4">
-            <div className="card w-100 h-100 d-flex">
+          <div className="w-100 h-100 ">
+            <div className="card w-100 h-100">
               <div
-                className="card-header d-flex align-items-center p-2  text-white border-bottom-0"
+                className="card-header d-flex align-items-center p-2 mt-0  text-white border-bottom-0"
                 style={{ background: "#7F00FF", height: "5vh" }}
               >
                 <div className="w-100 text-center">
