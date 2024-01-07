@@ -1,9 +1,0 @@
-matplotlib
-nltk
-numpy
-keras
-tensorflow
-pydot
-graphviz
-flask
-pyspellchecker
