@@ -10,16 +10,16 @@ const ChatPage = () => {
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === "") return;
-
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:8000', // Change the port as needed
+    });
     const updatedMessages = [...messages, { text: newMessage, sender: "user" }];
     setMessages(updatedMessages);
     setNewMessage("");
     setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
     scrollToTop();
     try {
-      const formData = new FormData();
-      formData.append("chatMessage", newMessage);
-      const response = await axios.post("/api/chat", formData);
+      const response = await axiosInstance(`/chatbot?ques=${encodeURIComponent(newMessage)}`);
       const serverResponse = { text: response.data, sender: "server" };
       setMessages([...updatedMessages, serverResponse]);
     } catch (error) {
