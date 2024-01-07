@@ -16,7 +16,7 @@ const ChatPage = () => {
     const updatedMessages = [...messages, { text: newMessage, sender: "user" }];
     setMessages(updatedMessages);
     setNewMessage("");
-    setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
+    // setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
     scrollToTop();
     try {
       const response = await axiosInstance(`/chatbot?ques=${encodeURIComponent(newMessage)}`);
@@ -90,7 +90,7 @@ const ChatPage = () => {
                         {message.sender === "server" ? (
                           <>
                             <img
-                              src="https://chatgpt.fr/wp-content/uploads/2023/05/Logo-1.svg"
+                              src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png"
                               alt="avatar 1"
                               style={{ width: "40px", height: "40px" }}
                             />
