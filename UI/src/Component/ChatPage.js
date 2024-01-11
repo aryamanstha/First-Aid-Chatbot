@@ -16,7 +16,7 @@ const ChatPage = () => {
     const updatedMessages = [...messages, { text: newMessage, sender: "user" }];
     setMessages(updatedMessages);
     setNewMessage("");
-    // setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
+    setMessages([...updatedMessages, { text: "Typing...", sender: "server" }]);
     scrollToTop();
     try {
       const response = await axiosInstance(`/chatbot?ques=${encodeURIComponent(newMessage)}`);
@@ -165,7 +165,7 @@ const ChatPage = () => {
                   </div>
                   <div>
                       <button
-                        className="btn px-3 fs-5 text-white"
+                        className="btn px-3  text-white"
                         
                         onClick={handleSendMessage}
                       >
