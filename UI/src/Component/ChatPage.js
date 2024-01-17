@@ -58,9 +58,9 @@ const ChatPage = () => {
 
   return (
     <section className="w-100 vh-100 m-0">
-      <div className="container w-100 vh-100">
+      <div className="ChatWidth m-auto vh-100">
         <div className="w-100 h-100">
-          <div className="w-100 h-100 ">
+          <div className="w-100 h-100">
             <div className="w-100 h-100 border-start border-end position-relative">
               <div
                 className="w-100 d-flex align-items-center top-0 p-2 text-white"
@@ -83,16 +83,18 @@ const ChatPage = () => {
                     {messages.map((message, index) => (
                       <div
                         key={index}
-                        className={`d-flex flex-row justify-content-${
+                        className={`d-flex w-75 flex-row justify-content-${
                           message.sender === "user" ? "end" : "start"
-                        } mb-4`}
+                        } mb-4 ${
+                          message.sender === "user" ? "ms-auto" : "me-auto"
+                        }`}
                       >
                         {message.sender === "server" ? (
                           <>
                             <img
-                              src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png"
+                              src="ChatbotAvatar.png"
                               alt="avatar 1"
-                              style={{ width: "40px", height: "40px" }}
+                              style={{ width: "65px", height: "65px" }}
                             />
                             <div
                               className={`p-3 ms-2 ${
@@ -130,7 +132,7 @@ const ChatPage = () => {
                               <p className="small mb-0">{message.text}</p>
                             </div>
                             <img
-                              src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                              src="userAvatar.webp"
                               alt="avatar 2"
                               style={{ width: "55px", height: "55px" }}
                             />
@@ -161,19 +163,16 @@ const ChatPage = () => {
                       onKeyDown={(e) => handleKeyDown(e)}
                       placeholder="Type your message..."
                     ></input>
-                    
                   </div>
-                  <div>
-                      <button
-                        className="btn px-3  text-white"
-                        
-                        onClick={handleSendMessage}
-                      >
-                        Send
-                      </button>
-                    </div>
+                  <div className="border border-light d-flex align-items-center rounded-pill px-2 h-75 ms-4">
+                    <button
+                      className="btn text-white"
+                      onClick={handleSendMessage}
+                    >
+                      Send
+                    </button>
+                  </div>
                 </div>
-                
               </div>
             </div>
           </div>
