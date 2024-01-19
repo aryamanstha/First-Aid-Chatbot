@@ -67,7 +67,7 @@ const ChatPage = () => {
                 style={{ background: "#7F00FF", height: "8%" }}
               >
                 <div className="w-100 text-center">
-                  <p className="mb-0 fw-bold ">FirstAid ChatBot</p>
+                  <p className="mb-0 fw-bold ">First Aid Assistance ChatBot</p>
                 </div>
               </div>
               <div
